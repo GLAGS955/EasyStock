@@ -1,0 +1,19 @@
+name: Deploy → Production
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: docker build -t app-prod ./backend
+      - name: Deploy
+        run: echo "Agrega aquí tu comando de deploy a producción"
+        env:
+          DEPLOY_TOKEN: ${{ secrets.PROD_DEPLOY_TOKEN }}
